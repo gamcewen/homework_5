@@ -1,5 +1,13 @@
 ---
 title: "Homework 5"
+author: "Gavin McEwen"
+date: "`r Sys.Date()`"
 output: pdf_document
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,
+                      warning = FALSE,
+                      message = FALSE,
+                      include = TRUE)
+```
