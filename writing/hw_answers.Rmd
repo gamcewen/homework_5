@@ -56,6 +56,8 @@ results <- monthly_homicides %>%
 ```{r plot_homicides, fig.width=900/96, fig.height=267/96}
 library(ggplot2)
 library(ggthemes)
+# Plot monthly homicides in Baltimore, MD with fill showing season and a -------
+# reference line showing the arrest of Freddie Gray ----------------------------
 ggplot(data = results,
        mapping = aes(x = date,
                      y = n,
@@ -73,7 +75,8 @@ ggplot(data = results,
                 y = max(n) * 0.9,
                 label = "Arrest of\nFreddie Gray"),
             color = "white",
-            hjust = 1.1) +
+            hjust = 1.1,
+            fontface = "plain") +
   scale_fill_manual(values = c("lightgray", "lightblue")) +
   labs(x = "Date",
        y = "Monthly homicides",
@@ -81,5 +84,12 @@ ggplot(data = results,
        fill = NULL) +
   theme_dark() +
   theme(legend.position = "bottom")
+# Save the plot to figures folder ----------------------------------------------
+ggsave(filename = "baltimore_monthly_homicides.png",
+       path = "../figures",
+       width = 900/96,
+       height = 267/96,
+       dpi = 600,
+       create.dir = TRUE)
 ```
 
