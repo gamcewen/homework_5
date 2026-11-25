@@ -11,3 +11,22 @@ knitr::opts_chunk$set(echo = TRUE,
                       message = FALSE,
                       include = TRUE)
 ```
+
+# Reading in the Washington Post homicide data
+
+```{r read_data}
+library(dplyr)
+library(readr)
+# Read in the homicide data from the Washington Post github repository ---------
+# (saved as a .csv) and combine city and state into a new column ---------------
+homicides <- read_csv("../data/homicide-data.csv") %>% 
+  mutate(city_name = paste0(city, ", ", state))
+```
+```{r subset_baltimore}
+library(lubridate)
+# Filter to only include Baltimore, MD -----------------------------------------
+baltimore_homicides <- homicides %>% 
+  filter(city_name == "Baltimore, MD") %>% 
+  mutate(reported_date = ymd(reported_date))
+```
+
