@@ -61,10 +61,16 @@ ggplot(data = results,
                      y = n,
                      fill = season)) +
   geom_col() +
+  geom_smooth(aes(group = 1), 
+              se = FALSE,
+              show.legend = FALSE,
+              span = 0.1) +
   scale_fill_manual(values = c("lightgray", "lightblue")) +
   labs(x = "Date",
        y = "Monthly homicides",
-       title = "Homicides in Baltimore, MD") +
-  theme_dark()
+       title = "Homicides in Baltimore, MD",
+       fill = NULL) +
+  theme_dark() +
+  theme(legend.position = "bottom")
 ```
 
