@@ -44,6 +44,11 @@ monthly_homicides <- baltimore_homicides %>%
   group_by(date) %>% 
   count() %>% 
   ungroup()
+# Add monthly homicide count and season data to a new results dataframe
+results <- monthly_homicides %>% 
+  mutate(month = month(date)) %>% 
+  mutate(season = case_when(month %in% c(5:10) ~ "Summer",
+                            month %in% c(1:4, 11:12) ~ "Winter"))
 ```
 
 # Plotting monthly homicides in Baltimore, MD
@@ -51,9 +56,10 @@ monthly_homicides <- baltimore_homicides %>%
 ```{r plot_homicides, fig.width=900/96, fig.height=267/96}
 library(ggplot2)
 library(ggthemes)
-ggplot(data = monthly_homicides,
+ggplot(data = results,
        mapping = aes(x = date,
-                     y = n)) +
+                     y = n,
+                     color = season)) +
   geom_col() +
   labs(x = "Date",
        y = "Monthly homicides",
