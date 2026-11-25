@@ -46,3 +46,13 @@ monthly_homicides <- baltimore_homicides %>%
   ungroup()
 ```
 
+# Plotting monthly homicides in Baltimore, MD
+
+```{r plot_homicides}
+library(ggplot2)
+ggplot(data = monthly_homicides,
+       mapping = aes(x = date,
+                     y = n)) +
+  geom_col()
+```
+
