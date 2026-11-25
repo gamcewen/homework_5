@@ -48,11 +48,16 @@ monthly_homicides <- baltimore_homicides %>%
 
 # Plotting monthly homicides in Baltimore, MD
 
-```{r plot_homicides}
+```{r plot_homicides, fig.width=900/96, fig.height=267/96}
 library(ggplot2)
+library(ggthemes)
 ggplot(data = monthly_homicides,
        mapping = aes(x = date,
                      y = n)) +
-  geom_col()
+  geom_col() +
+  labs(x = "Date",
+       y = "Monthly homicides",
+       title = "Homicides in Baltimore, MD") +
+  theme_dark()
 ```
 
