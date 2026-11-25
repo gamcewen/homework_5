@@ -22,14 +22,27 @@ library(readr)
 homicides <- read_csv("../data/homicide-data.csv") %>% 
   mutate(city_name = paste0(city, ", ", state))
 ```
+# Filtering to only include Baltimore, MD
+
 ```{r filter_baltimore}
 library(lubridate)
 # Filter to only include Baltimore, MD, convert reported_date to a date class, -
-# and add month numbers and names ----------------------------------------------
+# and add year and month -------------------------------------------------------
 baltimore_homicides <- homicides %>% 
   filter(city_name == "Baltimore, MD") %>% 
   mutate(reported_date = ymd(reported_date)) %>% 
-  mutate(month_number = month(reported_date),
-         month_name = month(reported_date, label = TRUE))
+  mutate(month = month(reported_date),
+         year = year(reported_date))
+```
+
+# Counting monthly homicides in Baltimore, MD
+
+```{r count_homicides}
+# Create a new dataframe that counts the monthly homicides ---------------------
+monthly_homicides <- baltimore_homicides %>% 
+  mutate(date = make_date(year = year, month = month)) %>% 
+  group_by(date) %>% 
+  count() %>% 
+  ungroup()
 ```
 
